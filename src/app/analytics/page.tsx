@@ -6,6 +6,7 @@ import { computeStats, computeCorrelation, getNumericColumns, getHistogramData, 
 import { ChartCard } from "@/components/ChartCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from "recharts";
 import { Activity, Sigma, Hash, Percent, FunctionSquare, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -74,10 +75,27 @@ export default function AnalyticsPage() {
 
     if (!activeFile) {
         return (
-            <div className="flex h-[80vh] flex-col items-center justify-center text-center">
-                <LayoutTemplate className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h2 className="text-xl font-bold">No data to analyze</h2>
-                <p className="text-muted-foreground">Please upload a file in the Files section first.</p>
+            <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 w-full h-full relative z-10">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/20 blur-[100px] rounded-full -z-10 pointer-events-none opacity-50"></div>
+
+                <Card className="max-w-md w-full bg-background/50 backdrop-blur-xl border-border/50 shadow-2xl relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-chart-1/5 opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <CardContent className="pt-10 pb-8 px-8 flex flex-col items-center text-center relative z-10">
+                        <div className="relative mb-6">
+                            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+                            <div className="h-20 w-20 bg-background/80 backdrop-blur-sm border border-border/50 rounded-2xl flex items-center justify-center relative shadow-lg">
+                                <Activity className="h-10 w-10 text-primary" />
+                            </div>
+                        </div>
+                        <h2 className="text-3xl font-extrabold tracking-tight mb-3 text-foreground">No data to analyze</h2>
+                        <p className="text-muted-foreground mb-8 text-base leading-relaxed">
+                            Upload a dataset to unlock powerful statistics, correlation matrices, and distribution insights.
+                        </p>
+                        <Button asChild size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-[1.02]">
+                            <a href="/files">Go to Data Sources</a>
+                        </Button>
+                    </CardContent>
+                </Card>
             </div>
         );
     }

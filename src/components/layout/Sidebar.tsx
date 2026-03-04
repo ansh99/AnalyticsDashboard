@@ -27,15 +27,17 @@ export function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <div className="flex h-full w-64 flex-col border-r bg-muted/30">
-            <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+        <div className="flex h-full w-64 flex-col border-r border-border/50 bg-sidebar/70 backdrop-blur-xl shadow-[4px_0_24px_-12px_rgba(0,0,0,0.1)] transition-all">
+            <div className="flex h-14 items-center border-b border-border/50 px-4 lg:h-[60px] lg:px-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold">
-                    <BrainCircuit className="h-6 w-6 text-primary" />
-                    <span className="">Nexus Analytics</span>
+                    <div className="flex items-center justify-center p-1.5 rounded-lg bg-primary/10 border border-primary/20 shadow-[0_0_15px_-3px_var(--primary)] text-primary">
+                        <BrainCircuit className="h-5 w-5" />
+                    </div>
+                    <span className="bg-gradient-to-r from-primary to-chart-1 bg-clip-text text-transparent font-bold">Nexus Analytics</span>
                 </Link>
             </div>
-            <div className="flex-1 overflow-auto py-2">
-                <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            <div className="flex-1 overflow-auto py-4">
+                <nav className="grid items-start px-2 text-sm font-medium lg:px-4 space-y-1">
                     {navItems.map((item) => {
                         const isActive = pathname === item.href;
                         return (
@@ -43,11 +45,13 @@ export function Sidebar() {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                                    isActive ? "bg-muted text-primary" : ""
+                                    "flex items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-all duration-300 hover:text-foreground",
+                                    isActive
+                                        ? "bg-primary/15 text-primary shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] border border-primary/20 backdrop-blur-md"
+                                        : "hover:bg-muted/50 border border-transparent"
                                 )}
                             >
-                                <item.icon className="h-4 w-4" />
+                                <item.icon className={cn("h-4 w-4 transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
                                 {item.name}
                             </Link>
                         );
