@@ -87,7 +87,7 @@ export function ShareModal({ children }: ShareModalProps) {
                     </TabsList>
                     <TabsContent value="link" className="space-y-4 py-4">
                         <div className="rounded-md bg-muted p-3">
-                            <p className="text-sm font-medium mb-1 truncate">
+                            <p className="text-sm font-medium mb-1 break-all whitespace-pre-wrap max-h-[150px] overflow-y-auto">
                                 {isGenerating ? "Generating link..." : shareUrl || "Data too large for URL sharing."}
                             </p>
                             <p className="text-xs text-muted-foreground mt-2">
